@@ -1,0 +1,61 @@
+main{
+  padding-top: 80px;
+}
+.home{
+  .calendar{
+    display: block;
+    width: 50%;
+    &__container {
+      margin: 0;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      border: 1px solid #3f51b5;
+      box-shadow: 0 3px 5px rgba(0, 0, 0, 0.5);
+      width: 90%;
+    }
+  }
+  .todo{
+    width: 50%;
+    &__container {
+      box-shadow: 0 3px 5px rgba(0, 0, 0, 0.5);
+      border: 1px solid #3f51b5;
+      width: 90%;
+      height: 100%;
+    }
+  }
+  .diary{
+    margin-top: 20px;
+    height: 50%;
+    &__container {
+      box-shadow: 0 3px 5px rgba(0, 0, 0, 0.5);
+      border: 1px solid #3f51b5;
+      width: 95%;
+      height: 90%;
+    }
+  }
+}
+
+.p-calendar{
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  box-sizing: border-box;
+  padding-top: 40px;
+}
+
+.p-diaries{
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  box-sizing: border-box;
+  padding-top: 40px;
+}
+
+
+.dialog{
+  height: 100%;
+}
+

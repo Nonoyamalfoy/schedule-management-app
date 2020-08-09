@@ -1,0 +1,122 @@
+html {
+  height: 100%;
+  font-family: "游ゴシック", YuGothic, "Hiragino Kaku Gothic ProN",
+    "ヒラギノ角ゴ ProN W3", "ヒラギノ角ゴ Pro W3", "メイリオ", Meiryo,
+    sans-serif;
+}
+
+body {
+  background-color: white;
+  // width: 100%;
+  height: 100%;
+  // display: flex;
+  // justify-content: center;
+  margin: 0;
+}
+
+#root {
+  margin: 0 auto;
+  // width: 100%;
+  max-width: 1000px;
+  height: 100%;
+}
+
+main {
+  height: 100%;
+  box-sizing: border-box;
+  padding-top: 56px;
+}
+
+.home {
+  width: 100%;
+  height: 90%;
+  max-width: 1000px;
+  display: flex;
+  flex-wrap: wrap;
+  .calendar {
+    margin-top: 20px;
+    min-width: 300px;
+    &__container {
+      position: relative;
+    }
+  }
+  .todo,  
+  .diary{
+    margin-top: 20px;
+    width: 100%;
+    min-width: 300px;
+    &__container {
+      position: relative;
+      min-height: 200px;
+      margin: 0 auto;
+    }
+  }
+}
+
+.p-calendar {
+  position: relative;
+  background-color: white;
+  width: 100%;
+  max-width: 1000px;
+}
+
+.form {
+  margin: 0 auto;
+  width: 90%;
+  max-width: 400px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+}
+
+.container__header {
+  & h2 {
+    font-weight: 200;
+    margin: 0;
+  }
+  background-color: #3f51b5;
+  color: white;
+  display: flex;
+  justify-content: space-between;
+  height: 15%;
+  max-height: 40px;
+  padding: 0 16px;
+  margin: 0;
+}
+
+.loading {
+  align-items: center;
+  background: rgba(255, 255, 255, 0.7);
+  display: flex;
+  flex-flow: column;
+  justify-content: center;
+  opacity: 0.9;
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100vh;
+  width: 100%;
+  z-index: 9999;
+
+  & > p {
+    color: #444;
+    font-weight: 600;
+    margin-top: 1rem;
+    text-align: center;
+  }
+}
+
+.validation {
+  height: 20px;
+}
+
+/*********** Module Spacer ***********/
+.module-spacer--extra-small {
+  height: 12px;
+}
+.module-spacer--small {
+  height: 20px;
+}
+.module-spacer--medium {
+  height: 32px;
+}
