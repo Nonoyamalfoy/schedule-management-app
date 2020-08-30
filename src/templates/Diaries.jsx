@@ -8,7 +8,6 @@ import List from "@material-ui/core/List";
 import { useSelector, useDispatch } from "react-redux";
 import { getDiaries } from "../reducks/users/selectors";
 import { getCurrentDate } from "../reducks/calendar/selectors";
-import { getDate } from "../services/calendar";
 import { openAddDiaryDialog } from "../reducks/addDiary/operations";
 import { CreateButton } from "../components/Uikit";
 
@@ -17,7 +16,7 @@ const Diaries = () => {
   const selector = useSelector((state) => state);
   const diaries = getDiaries(selector);
   const currentDate = getCurrentDate(selector);
-  const formatCurrentDate = getDate(currentDate).format("YYYYMMDD");
+  const formatCurrentDate = currentDate.format("YYYYMMDD");
   const screenDiaries = diaries
     .filter((diary) => diary.date <= formatCurrentDate)
     .sort((a, b) => (a.date < b.date ? 1 : -1))

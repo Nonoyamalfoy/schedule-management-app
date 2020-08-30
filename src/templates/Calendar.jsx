@@ -4,7 +4,7 @@ import { makeStyles } from "@material-ui/styles";
 import { useDispatch, useSelector } from "react-redux";
 import { openAddScheduleDialog } from "../reducks/addSchedule/operation";
 import { getCurrentDate } from "../reducks/calendar/selectors";
-import { getDate } from "../services/calendar";
+// import { getDate } from "../services/calendar";
 import { AddScheduleDialog, CurrentScheduleDialog } from "../components/Schedule";
 import { CreateButton } from "../components/Uikit";
 import { CurrentDateSchedulesDialog } from "../components/Calendar";
@@ -35,14 +35,13 @@ const Calendar = () => {
   const dispatch = useDispatch();
   const selector = useSelector((state) => state);
   const currentDate = getCurrentDate(selector);
-  const dayjsCurrentDate = getDate(currentDate);
 
   return (
     <div className="p-calendar">
       <CreateButton
         onClick={() =>
           dispatch(
-            openAddScheduleDialog(dayjsCurrentDate, "", "", "", "", "default")
+            openAddScheduleDialog(currentDate, "", "", "", "", "default")
           )
         }
         className={classes.create}

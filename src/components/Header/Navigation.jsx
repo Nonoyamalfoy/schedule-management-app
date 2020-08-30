@@ -30,7 +30,6 @@ const Navigation = () => {
   const dispatch = useDispatch();
   const selector = useSelector((state) => state);
   const currentDate = getCurrentDate(selector);
-  const dayjsCurrentDate = getDate(currentDate);
 
   return(
       <Toolbar className={classes.toolBar}>
@@ -41,7 +40,7 @@ const Navigation = () => {
           InputProps={{style: {fontSize: 20, color: "white"}, disableUnderline: true}}
           InputLabelProps={{style: {fontSize: 20, color: "white", }}}
           className={classes.datePicker}
-          value={dayjsCurrentDate}
+          value={currentDate}
           onChange={(e) => dispatch(setDate(e))}
           variant="inline"
           format="YYYY/MM/DD"

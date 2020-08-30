@@ -7,7 +7,7 @@ import {
   fetchDiariesAction,
   fetchToDoListAction,
 } from "./actions";
-import { getDate } from "../../services/calendar";
+// import { getDate } from "../../services/calendar";
 import { closeAddDiaryDialog } from "../addDiary/operations";
 import { closeAddScheduledialog } from "../addSchedule/operation";
 import { hideLoadingAction, showLoadingAction } from "../loading/actions";
@@ -38,7 +38,7 @@ export const addDiary = () => {
     const diary = getState().addDiary.form;
     const timestamp = FirebaseTimestamp.now();
     const date = getState().calendar;
-    const currentDate = getDate(date).format("YYYYMMDD");
+    const currentDate = date.format("YYYYMMDD");
 
     if (diary.text === "") {
       alert("必須項目が未入力です");

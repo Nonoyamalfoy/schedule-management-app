@@ -6,7 +6,7 @@ export const setAddSchedule = value => {
   }
 };
 
-export const openAddScheduleDialog = (date, scheduleId, title, description, location, color ) => {
+export const openAddScheduleDialog = (date, color, scheduleId, title, description, location ) => {
   return async(dispatch) => {
     dispatch(addScheduleOpenDialog());
     dispatch(addScheduleSetValue({

@@ -19,7 +19,7 @@ const DiaryHeader = () => {
   const dispatch = useDispatch();
   const selector = useSelector((state) => state);
   const currentDate = getCurrentDate(selector);
-  const formatCurrentDate = getDate(currentDate).format("YYYYMMDD");
+  const formatCurrentDate = currentDate.format("YYYYMMDD");
   const diaries = getDiaries(selector);
   const currentDiary = diaries.find((d) => d.date === formatCurrentDate);
   const currentDiaryText = currentDiary ? currentDiary.text : "";

@@ -33,8 +33,7 @@ const SchedulesList = () => {
   const selector = useSelector((state) => state);
   const schedules = getSchedules(selector);
   const currentDate = getCurrentDate(selector);
-  const dayjsCurrentDate = getDate(currentDate);
-  const currentDateSchedules = schedules ? schedules.filter((s) => s.date === dayjsCurrentDate.format("YYYYMMDD"))
+  const currentDateSchedules = schedules ? schedules.filter((s) => s.date === currentDate.format("YYYYMMDD"))
     : "";
 
   return (

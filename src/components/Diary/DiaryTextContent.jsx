@@ -25,7 +25,7 @@ const DiaryTextContent = () => {
   const selector = useSelector((state) =>  state);
   const diaries = getDiaries(selector);
   const currentDate = getCurrentDate(selector);
-  const formatCurrentDate = getDate(currentDate).format("YYYYMMDD");
+  const formatCurrentDate = currentDate.format("YYYYMMDD");
   const currentDiary = diaries.find(d => d.date === formatCurrentDate);
   
   return (

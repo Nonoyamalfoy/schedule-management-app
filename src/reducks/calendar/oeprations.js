@@ -17,7 +17,7 @@ export const setPreviousMonth = () => {
 
 export const setDate = dayObj => {
   return async (dispatch) => {
-    const month = formatDate(dayObj);
+    const month = dayObj;
     dispatch(calendarSetDate(month))
   }
 }

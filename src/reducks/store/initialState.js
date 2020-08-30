@@ -17,7 +17,7 @@ const initialState = {
     diaries:[],
     ToDoList: [],
   },
-  calendar: formatDate(day),
+  calendar: day,
   addSchedule:{
     form: {
       scheduleId: "",

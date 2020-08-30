@@ -18,7 +18,7 @@ import { MoreButton, CloseButton, CreateButton } from "../Uikit";
 import { ScheduleItem } from "../Schedule";
 import List from "@material-ui/core/List";
 import { getCurrentDate } from "../../reducks/calendar/selectors";
-import { getDate } from "../../services/calendar";
+// import { getDate } from "../../services/calendar";
 import CreateIcon from "@material-ui/icons/Create";
 import { IconButton } from "@material-ui/core";
 import { openAddScheduleDialog } from "../../reducks/addSchedule/operation";
@@ -62,11 +62,10 @@ const CurrentScheduleDialog = () => {
   const selector = useSelector((state) => state);
   const dispatch = useDispatch();
   const currentDate = getCurrentDate(selector);
-  const dayjsCurrentDate = getDate(currentDate);
-  const formatCurrentDate = getDate(currentDate).format("YYYY/MM/DD");
+  const formatCurrentDate = currentDate.format("YYYY/MM/DD");
   const schedules = getSchedules(selector);
   const currentDateSchedules = schedules
-    ? schedules.filter((s) => s.date === dayjsCurrentDate.format("YYYYMMDD"))
+    ? schedules.filter((s) => s.date === currentDate.format("YYYYMMDD"))
     : "";
   const isDialogOpen = getCurrentDateSchedulesIsDialogOpen(selector);
 
@@ -88,12 +87,12 @@ const CurrentScheduleDialog = () => {
             onClick={() => {
               dispatch(
                 openAddScheduleDialog(
-                  dayjsCurrentDate,
+                  currentDate,
+                  "default",
                   "",
                   "",
                   "",
                   "",
-                  "default"
                 )
               );
             }}

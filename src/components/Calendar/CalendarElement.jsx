@@ -7,7 +7,6 @@ import {ScheduleBar} from "./index";
 import { getCurrentDate } from "../../reducks/calendar/selectors";
 import { useSelector } from "react-redux";
 
-
 const useStyles = makeStyles((theme) => ({
   element: {
     display: "inline-block",
@@ -44,14 +43,13 @@ const CalendarElement = (props) => {
   const classes = useStyles();
   const selector = useSelector((state) => state)
   const currentDate = getCurrentDate(selector)
-  const dayjsCurrentDate = getDate(currentDate);
   const today = dayjs();
   const format = isFirstDay(props.date) ? "M/D" : "D";
-  const currentMonth = getMonth(currentDate);
-  const isCurrentMonth = isSameMonth(props.date, currentMonth) ? "textPrimary" : "textSecondary";
+  const isCurrentMonth = isSameMonth(props.date, currentDate) ? "textPrimary" : "textSecondary";
   
+
   let date = "";
-  if(isSameDay(props.date, dayjsCurrentDate)) {
+  if(isSameDay(props.date, currentDate)) {
     date = classes.currentDate
   } else if(isSameDay(props.date, today)) {
     date = classes.today

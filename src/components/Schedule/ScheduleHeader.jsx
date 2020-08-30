@@ -19,7 +19,6 @@ const ScheduleHeader = () => {
   const dispatch = useDispatch();
   const selector = useSelector((state) => state)
   const currentDate = getCurrentDate(selector);
-  const dayjsCurrentDate = getDate(currentDate);
 
   return (
     <div className="container__header">
@@ -27,7 +26,7 @@ const ScheduleHeader = () => {
         <CreateButton
             className={classes.icon}
             size="small"
-            onClick={() => dispatch(openAddScheduleDialog(dayjsCurrentDate, "", "", "", "", "default"))}
+            onClick={() => dispatch(openAddScheduleDialog(currentDate, "default", "", "", "", ""))}
           />
     </div>
   );
