@@ -15,7 +15,7 @@ const useStyles = makeStyles( (theme) => ({
     },
     width: "100%",
     boxSizing: "border-box",
-    padding: "0 16px",
+    padding: "16px 16px",
     overflow: "scroll",
   }
 }));
@@ -24,16 +24,20 @@ const DiaryTextContent = () => {
   const classes = useStyles();
   const selector = useSelector((state) =>  state);
   const diaries = getDiaries(selector);
-  const date = getCurrentDate(selector);
-  const currentDate = getDate(date).format("YYYYMMDD");
-  const currentDiary = diaries.filter(d => d.date === currentDate);
+  const currentDate = getCurrentDate(selector);
+  const formatCurrentDate = getDate(currentDate).format("YYYYMMDD");
+  const currentDiary = diaries.find(d => d.date === formatCurrentDate);
   
   return (
-    <div  className={classes.diaryTextContent}>
-      {currentDiary.length > 0 && (
+    <div className={classes.diaryTextContent}>
+      {currentDiary ? (
         <div>
-          {returnCodeToBr(currentDiary[0].text)}
+          {returnCodeToBr(currentDiary.text)}
         </div>
+      ) : (
+        <p className="empty-item">
+          There is no diary for today.
+        </p>
       )}
     </div>
   )

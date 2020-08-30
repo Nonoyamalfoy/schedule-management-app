@@ -28,27 +28,20 @@ export const removeSchedule = (uid, scheduleId) => {
     .delete()
 }
 
-export const toggleCompleted = (uid, scheduleId, completed) => {
-    db.collection("users").doc(uid)
-    .collection("schedules")
-    .doc(scheduleId)
-    .set({completed: !completed}, {merge: true})
-}
-
 export const setScheduleColor = color => {
   let scheduleColor
   switch (color) {
     case "default":
-      scheduleColor = "#6274da"
+      scheduleColor = "#000088"
       break;
     case "red":
-      scheduleColor = "#CC0000"
+      scheduleColor = "#880000"
       break;
     case "orange":
-      scheduleColor = "#FF9933"
+      scheduleColor = "#D2691E"
       break;
     case "green":
-      scheduleColor = "#009900"
+      scheduleColor = "#008800"
       break;
     default:
       break;

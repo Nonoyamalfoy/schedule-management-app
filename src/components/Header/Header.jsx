@@ -12,7 +12,7 @@ const useStyles = makeStyles({
     flexGrow: 1,
   },
   menuBar: {
-    backgroundColor: "#3f51b5",
+    // backgroundColor: "#20295f",
   },
   toolBar: {
     padding: "0",

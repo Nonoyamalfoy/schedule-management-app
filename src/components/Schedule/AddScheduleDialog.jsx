@@ -5,8 +5,7 @@ import {
   DialogContent,
   DialogActions,
   Grid,
-  IconButton,
-  Typography,
+
 } from "@material-ui/core";
 import {
   getIsDialogOpen,
@@ -21,13 +20,12 @@ import {
   LocationOnOutlined,
   NotesOutlined,
   AccessTime,
-  Close,
 } from "@material-ui/icons";
 import { DatePicker } from "@material-ui/pickers";
 import { makeStyles } from "@material-ui/styles";
 import { setAddSchedule } from "../../reducks/addSchedule/operation";
 import { addSchedule } from "../../reducks/users/operations";
-import { TextInput, SaveButton, SelectBox, ValidationTextInput } from "../Uikit";
+import { TextInput, SaveButton, SelectBox, ValidationTextInput, CloseButton } from "../Uikit";
 import { setScheduleColor } from "../../services/schedule";
 import { isCloseDialog } from "../../services/schedule";
 
@@ -38,20 +36,6 @@ const useStyles = makeStyles({
     display: "block",
     marginLeft: 6,
     borderRadius: 4,
-  },
-  dialogHeader: {
-    display: "flex",
-    justifyContent: "flex-end",
-    minHeight: 48,
-    backgroundColor: "#3f51b5",
-    color: "white",
-    alignItems: "center",
-  },
-  icon: {
-    color: "white",
-  },
-  validation: {
-    height: 20,
   },
 });
 
@@ -84,18 +68,13 @@ const AddScheduleDialog = () => {
       maxWidth="xs"
       fullWidth
     >
-      <div className={classes.dialogHeader}>
+      <div className="dialogHeader">
         <DialogActions>
-          <IconButton
-            onClick={() => {
-              if (isCloseDialog(form)) {
-                dispatch(closeAddScheduledialog());
-              }
-            }}
-            size="small"
-          >
-            <Close className={classes.icon} />
-          </IconButton>
+          <CloseButton onClick={() => {
+            if (isCloseDialog(form)) {
+              dispatch(closeAddScheduledialog());
+            }
+          }}/>
         </DialogActions>
       </div>
 

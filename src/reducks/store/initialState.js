@@ -14,7 +14,8 @@ const initialState = {
     uid: "",
     username: "",
     schedules: [],
-    diaries:[]
+    diaries:[],
+    ToDoList: [],
   },
   calendar: formatDate(day),
   addSchedule:{
@@ -25,7 +26,6 @@ const initialState = {
       title: "",
       description: "",
       location: "",
-      completed: false
     },
     isDialogOpen: false,
     isStartEdit: false,
@@ -39,6 +39,16 @@ const initialState = {
     isDialogOpen: false,
     isStartEdit: false,
   },
+  addToDo: {
+    form: {
+      ToDoId: "",
+      text: "",
+      deadline: null,
+      completed: false
+    },
+    isDialogOpen: false,
+    isStartEdit: false
+  },
   currentSchedule: {
     item: null,
     isDialogOpen: false
@@ -46,7 +56,12 @@ const initialState = {
   currentDiary: {
     item: null,
     isDialogOpen: false
-  }
+  },
+  currentDateSchedules: {
+    items: [],
+    isDialogOpen: false
+  },
+
 };
 
 export default initialState;

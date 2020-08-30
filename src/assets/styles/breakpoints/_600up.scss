@@ -1,12 +1,11 @@
-main{
+main {
   padding-top: 80px;
 }
-.home{
-  .calendar{
-    display: block;
+.home {
+  .calendar {
     width: 50%;
     &__container {
-      margin: 0;
+      position: relative;
       top: 50%;
       left: 50%;
       transform: translate(-50%, -50%);
@@ -15,47 +14,45 @@ main{
       width: 90%;
     }
   }
-  .todo{
+  .schedule {
+    margin-top: 20px;
+    margin-bottom: 20px;
     width: 50%;
     &__container {
       box-shadow: 0 3px 5px rgba(0, 0, 0, 0.5);
-      border: 1px solid #3f51b5;
+      border: 1px solid #20295f;
       width: 90%;
       height: 100%;
     }
   }
-  .diary{
-    margin-top: 20px;
+  .diary {
     height: 50%;
     &__container {
       box-shadow: 0 3px 5px rgba(0, 0, 0, 0.5);
-      border: 1px solid #3f51b5;
+      border: 1px solid #20295f;
       width: 95%;
       height: 90%;
     }
   }
 }
 
-.p-calendar{
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  box-sizing: border-box;
-  padding-top: 40px;
+.p-calendar {
+  margin-top: 20px;
+  box-shadow: 0 3px 5px rgba(0, 0, 0, 0.5);
+  border: 1px solid #20295f;
 }
 
-.p-diaries{
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
+.p-diaries,
+.p-ToDoList {
   box-sizing: border-box;
-  padding-top: 40px;
+  padding-top: 20px;
 }
 
-
-.dialog{
-  height: 100%;
+.container__header {
+  & h2 {
+    font-size: 1.5rem;
+    line-height: normal;
+  }
+  height: auto;
 }
 

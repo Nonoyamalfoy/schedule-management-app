@@ -5,11 +5,32 @@ import {
   signOutAction,
   fetchSchedulesAction,
   fetchDiariesAction,
+  fetchToDoListAction,
 } from "./actions";
 import { getDate } from "../../services/calendar";
 import { closeAddDiaryDialog } from "../addDiary/operations";
 import { closeAddScheduledialog } from "../addSchedule/operation";
 import { hideLoadingAction, showLoadingAction } from "../loading/actions";
+import { closeAddToDodialog } from "../addToDo/operation";
+import { isValidEmailFormat } from "../../services/user";
+
+export const fetchDiaries = (diaries) => {
+  return async (dispatch) => {
+    await dispatch(fetchDiariesAction(diaries));
+  };
+};
+
+export const fetchSchedules = (schedules) => {
+  return async (dispatch) => {
+    await dispatch(fetchSchedulesAction(schedules));
+  };
+};
+
+export const fetchToDoList = (ToDoList) => {
+  return async (dispatch) => {
+    await dispatch(fetchToDoListAction(ToDoList));
+  };
+};
 
 export const addDiary = () => {
   return async (dispatch, getState) => {
@@ -48,46 +69,37 @@ export const addDiary = () => {
   };
 };
 
-export const fetchDiaries = () => {
+export const addToDo = () => {
   return async (dispatch, getState) => {
     const uid = getState().users.uid;
-    const date = getState().calendar;
-    const currentDate = getDate(date).format("YYYYMMDD");
+    const ToDo = getState().addToDo.form;
+    const timestamp = FirebaseTimestamp.now();
 
-    const diaries = [];
-    db.collection("users")
-      .doc(uid)
-      .collection("diaries")
-      .where("date", "<=", currentDate)
-      .orderBy("date", "desc")
-      .limit(6)
-      .get()
-      .then((snapshots) => {
-        snapshots.forEach((snapshot) => {
-          const data = snapshot.data();
-          diaries.push(data);
-        });
-        dispatch(fetchDiariesAction(diaries));
-      });
-  };
-};
-
-export const fetchSchedules = () => {
-  return async (dispatch, getState) => {
-    const uid = getState().users.uid;
-    const schedules = [];
-    db.collection("users")
-      .doc(uid)
-      .collection("schedules")
-      .orderBy("updated_at", "desc")
-      .get()
-      .then((snapshots) => {
-        snapshots.forEach((snapshot) => {
-          const data = snapshot.data();
-          schedules.push(data);
-        });
-        dispatch(fetchSchedulesAction(schedules));
-      });
+    if (ToDo.text === "") {
+      alert("必須項目が未入力です");
+    } else {
+      if (ToDo.ToDoId) {
+        dispatch(closeAddToDodialog());
+        const ToDoRef = db
+          .collection("users")
+          .doc(uid)
+          .collection("ToDoList")
+          .doc(ToDo.ToDoId);
+        ToDo["updated_at"] = timestamp;
+        await ToDoRef.set(ToDo, { merge: true });
+      } else {
+        dispatch(closeAddToDodialog());
+        const ToDoRef = db
+          .collection("users")
+          .doc(uid)
+          .collection("ToDoList")
+          .doc();
+        ToDo["ToDoId"] = ToDoRef.id;
+        ToDo["created_at"] = timestamp;
+        ToDo["updated_at"] = timestamp;
+        await ToDoRef.set(ToDo);
+      }
+    }
   };
 };
 
@@ -156,21 +168,28 @@ export const listenAuthState = () => {
 
 export const resetPassword = (email) => {
   return async (dispatch) => {
+    dispatch(showLoadingAction("Reset Password..."));
     if (email === "") {
+      dispatch(hideLoadingAction());
       alert("必須項目が未入力です");
-    } else {
-      auth
-        .sendPasswordResetEmail(email)
-        .then(() => {
-          alert(
-            "入力されたアドレスにパスワードリセット用のメールを送信しました"
-          );
-          dispatch("/signin");
-        })
-        .catch(() => {
-          alert("パスワードリセットに失敗しました。");
-        });
+      return false
     }
+    if (!isValidEmailFormat(email)) {
+      dispatch(hideLoadingAction());
+      alert('メールアドレスの形式が不正です。')
+      return false
+    }
+    return auth
+      .sendPasswordResetEmail(email)
+      .then(() => {
+        dispatch(hideLoadingAction());
+        alert("入力されたアドレスにパスワードリセット用のメールを送信しました");
+        dispatch("/signin");
+      })
+      .catch(() => {
+        dispatch(hideLoadingAction());
+        alert("パスワードリセットに失敗しました。");
+      });
   };
 };
 
@@ -182,16 +201,19 @@ export const signIn = (email, password) => {
       alert("必須項目が未入力です");
       return false;
     }
+    if (!isValidEmailFormat(email)) {
+      dispatch(hideLoadingAction());
+      alert("メールアドレスの形式が不正です。");
+      return false;
+    }
     return auth
       .signInWithEmailAndPassword(email, password)
       .then((result) => {
         const user = result.user;
-
         if (!user) {
           dispatch(hideLoadingAction());
           throw new Error("ユーザーIDを取得できません");
         }
-
         const uid = user.uid;
         return db
           .collection("users")
@@ -217,6 +239,7 @@ export const signIn = (email, password) => {
       })
       .catch(() => {
         dispatch(hideLoadingAction());
+        alert("サインインに失敗しました");
       });
   };
 };
@@ -230,6 +253,10 @@ export const signUp = (username, email, password, confirmPassword) => {
       confirmPassword === ""
     ) {
       alert("必須項目が未入力です");
+      return false;
+    }
+    if (!isValidEmailFormat(email)) {
+      alert("メールアドレスの形式が不正です。もう1度お試しください。");
       return false;
     }
     if (password !== confirmPassword) {

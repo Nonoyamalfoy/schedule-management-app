@@ -9,7 +9,6 @@ export const closeDialog = () => {
 export const openCurrentScheduleDialog = (schedule, e) => {
   return async (dispatch) => {
     e.stopPropagation();
-
     dispatch(currentScheduleSetItem(schedule));
     dispatch(currentScheduleOpenDialog());
   }

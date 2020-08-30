@@ -49,7 +49,3 @@ export const formatDate = day => ({
   date: day.date(),
 }); 
 
-export const dayColor = () => {
-  
-}
-

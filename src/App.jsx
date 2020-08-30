@@ -2,7 +2,7 @@ import React from 'react';
 import Router from "./Router";
 import {Header} from "./components/Header";
 import "./assets/styles/vendors/style.css"
-import Loading from './components/Uikit/Loading';
+import {Loading} from './components/Uikit';
 
 const App = () => {
   return (

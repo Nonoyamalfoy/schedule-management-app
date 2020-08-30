@@ -1,3 +1,7 @@
+export { default as CloseButton } from "./CloseButton";
+export { default as CreateButton } from "./CreateButton";
+export { default as DeleteButton } from "./DeleteButton";
+export { default as Loading } from "./Loading";
 export { default as MoreButton } from "./MoreButton";
 export { default as PrimaryButton } from "./PrimaryButton";
 export { default as SaveButton } from "./SaveButton";

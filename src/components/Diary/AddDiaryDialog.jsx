@@ -1,31 +1,34 @@
 import React from 'react';
-import {Dialog, DialogActions, DialogContent, IconButton} from '@material-ui/core';
-import {Close} from "@material-ui/icons";
+import {Dialog, DialogActions, DialogContent} from '@material-ui/core';
 import { addDiary} from '../../reducks/users/operations';
 import { useDispatch, useSelector } from 'react-redux';
 import { setAddDiary, closeAddDiaryDialog, setIsEditStart } from '../../reducks/addDiary/operations';
 import {getForm} from "../../reducks/addDiary/selector";
 import {getIsDialogOpen, getIsStartEdit} from "../../reducks/addDiary/selector";
-import { SaveButton, ValidationTextInput } from '../Uikit';
+import { SaveButton, ValidationTextInput, CloseButton } from '../Uikit';
 import {makeStyles } from "@material-ui/styles";
 import {isCloseDialog} from "../../services/diary";
 
-const useStyles = makeStyles({
-  dialogHeader: {
-    display: "flex",
-    justifyContent: "flex-end",
-    minHeight: 48,
-    backgroundColor: "#3f51b5",
-    color: "white",
-    alignItems:"center"
-  },
-  icon: {
-    color: "white"
-  },
-  validation: {
-    height: 20
+
+const useStyles = makeStyles((theme) => ({
+  dialog: {
+    [theme.breakpoints.down(600)]: {
+      "& .MuiDialog-paperFullWidth": {
+        width: "100%"
+      },
+      "& .MuiDialog-paperWidthSm": {
+        maxWidth: "100%"
+      },
+      "& .MuiDialog-paper": {
+        margin: 0
+      },
+      "& .MuiDialog-paperScrollPaper": {
+        maxHeight: "100%",
+        height: "100%"
+      },
+    }
   }
-});
+}));
 
 const AddDiaryDialog = () => {
   const classes = useStyles();
@@ -39,7 +42,7 @@ const AddDiaryDialog = () => {
   return (
     <div>
       <Dialog 
-        className="dialg" 
+        className={classes.dialog} 
         open={open} 
         onClose={() => {
           if(isCloseDialog(form)){
@@ -47,18 +50,15 @@ const AddDiaryDialog = () => {
           }
         }} 
         fullWidth 
+        // fullScreen
       >
-        <div className={classes.dialogHeader}>
+        <div className="dialogHeader">
           <DialogActions>
-              <IconButton 
-              onClick={() => {
+              <CloseButton  onClick={() => {
                 if(isCloseDialog(form)){
                   dispatch(closeAddDiaryDialog())
                 }
-              }} 
-              size="small">
-                <Close className={classes.icon} />
-              </IconButton>
+              }} />
           </DialogActions>
         </div>
         
@@ -67,7 +67,7 @@ const AddDiaryDialog = () => {
             autoFocus={true}
             label="Diary"
             multiline={true}
-            rows={18}
+            // rows={16}
             value={form.text}
             onChange={e => dispatch(setAddDiary({text: e.target.value}))}
             onBlur={() => dispatch(setIsEditStart())}

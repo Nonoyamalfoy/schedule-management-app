@@ -3,7 +3,9 @@ import {makeStyles} from "@material-ui/styles";
 import {Typography, ListItem} from "@material-ui/core";
 import dayjs from "dayjs";
 import { isSameMonth, isFirstDay, isSameDay, getMonth, getDate } from "../../services/calendar";
-import {Schedule} from "./index";
+import {ScheduleBar} from "./index";
+import { getCurrentDate } from "../../reducks/calendar/selectors";
+import { useSelector } from "react-redux";
 
 
 const useStyles = makeStyles((theme) => ({
@@ -32,7 +34,7 @@ const useStyles = makeStyles((theme) => ({
     display: "inline-block",
     lignHeight: "28px",
     width: "28px",
-    backgroundColor: "#3f51b5",
+    backgroundColor: "#000088",
     color: "#fff",
     borderRadius: "50%"
   },
@@ -40,22 +42,19 @@ const useStyles = makeStyles((theme) => ({
 
 const CalendarElement = (props) => {
   const classes = useStyles();
-  // {year: 2020, month: 8, date: 4}形式
-  const CD = props.currentDate;
-  // dayjsインスタンスのcurrentday
-  const currentDate = getDate(CD);
+  const selector = useSelector((state) => state)
+  const currentDate = getCurrentDate(selector)
+  const dayjsCurrentDate = getDate(currentDate);
   const today = dayjs();
   const format = isFirstDay(props.date) ? "M/D" : "D";
-  const currentMonth = getMonth(CD);
+  const currentMonth = getMonth(currentDate);
   const isCurrentMonth = isSameMonth(props.date, currentMonth) ? "textPrimary" : "textSecondary";
   
   let date = "";
-  if(isSameDay(props.date, currentDate)) {
+  if(isSameDay(props.date, dayjsCurrentDate)) {
     date = classes.currentDate
   } else if(isSameDay(props.date, today)) {
     date = classes.today
-  } else {
-    date = ""
   }
   
   return(
@@ -73,7 +72,7 @@ const CalendarElement = (props) => {
       </Typography>
       <div className={props.schedulesStyle} >
         {props.schedules.map(schedule => (
-          <Schedule key={schedule.scheduleId} schedule={schedule}/>
+          <ScheduleBar key={schedule.scheduleId} schedule={schedule}/>
         ))}
       </div>
     </ListItem >

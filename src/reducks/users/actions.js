@@ -13,6 +13,13 @@ export const fetchSchedulesAction = (schedules) => {
     payload: schedules
   }
 }
+export const FETCH_TODOLIST = "FETCH_TODOLIST";
+export const fetchToDoListAction = (ToDoList) => {
+  return {
+    type: "FETCH_TODOLIST",
+    payload: ToDoList
+  }
+}
 
 export const SIGN_IN = "SIGN_IN";
 export const signInAction = (userState) => {

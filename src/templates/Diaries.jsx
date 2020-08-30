@@ -1,64 +1,51 @@
-import React, {useEffect} from 'react';
-import {Diary} from "../components/Diaries";
-import { makeStyles } from '@material-ui/core/styles';
-import List from '@material-ui/core/List';
-import { useDispatch, useSelector } from 'react-redux';
-import {getDiaries} from "../reducks/users/selectors";
-import { fetchDiaries } from '../reducks/users/operations';
-import {AddDiaryDialog} from "../components/DiaryContainer";
-import { getCurrentDate } from '../reducks/calendar/selectors';
-import {db} from "../firebase/index";
-import {getUserId} from "../reducks/users/selectors";
-import {CurrentDiaryDialog} from "../components/Diaries"
-
-const useStyles = makeStyles((theme) => ({
-  root: {
-    margin: "0 auto",
-    width: '90%',
-    maxWidth: '1000px',
-  }
-}));
+import React from "react";
+import {
+  DiaryList,
+  CurrentDiaryDialog,
+  AddDiaryDialog,
+} from "../components/Diary";
+import List from "@material-ui/core/List";
+import { useSelector, useDispatch } from "react-redux";
+import { getDiaries } from "../reducks/users/selectors";
+import { getCurrentDate } from "../reducks/calendar/selectors";
+import { getDate } from "../services/calendar";
+import { openAddDiaryDialog } from "../reducks/addDiary/operations";
+import { CreateButton } from "../components/Uikit";
 
 const Diaries = () => {
-  const classes = useStyles();
   const dispatch = useDispatch();
-  const selector = useSelector((state) => state)
-
+  const selector = useSelector((state) => state);
   const diaries = getDiaries(selector);
-  const date = getCurrentDate(selector);
-
-  const uid = getUserId(selector);
-
-  useEffect(() => {
-    console.log(date);
-    dispatch(fetchDiaries())
-  }, [date]);
-
-  useEffect(() => {
-    const unsubscribe = db.collection("users").doc(uid).collection("diaries")
-      .onSnapshot(() => {
-        console.log(uid);
-        dispatch(fetchDiaries())
-      });
-      return () => unsubscribe()
-  }, []);
-
+  const currentDate = getCurrentDate(selector);
+  const formatCurrentDate = getDate(currentDate).format("YYYYMMDD");
+  const screenDiaries = diaries
+    .filter((diary) => diary.date <= formatCurrentDate)
+    .sort((a, b) => (a.date < b.date ? 1 : -1))
+    .slice(0, 6);
+  const currentDateDiary = diaries.filter(
+    (diary) => diary.date === formatCurrentDate
+  );
 
   return (
     <div className="p-diaries">
-      <List  className={classes.root}>
-        {diaries.length > 0 && (
-            diaries.map(diary => <Diary diary={diary} key={diary.diaryId} />)
-          )}
-      </List>
-      <div className="dialog">
+      {!currentDateDiary.length > 0 && (
+        <CreateButton onClick={() => dispatch(openAddDiaryDialog())} />
+      )}
+      <div className="p-diaries__container">
+        {screenDiaries.length > 0 ? (
+          <List>
+            {screenDiaries.map(diary => (
+              <DiaryList diary={diary} key={diary.diaryId} />
+            ))}
+          </List>
+        ) : (
+          <h2 className="empty-item">There is no diary before currentDate.</h2>
+        )}
         <AddDiaryDialog />
-      </div>
-      <div>
-        <CurrentDiaryDialog/>
+        <CurrentDiaryDialog />
       </div>
     </div>
   );
-}
+};
 
 export default Diaries;

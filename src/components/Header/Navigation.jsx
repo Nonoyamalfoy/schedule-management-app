@@ -12,6 +12,7 @@ import {makeStyles} from "@material-ui/styles";
 
 const useStyles = makeStyles({
   toolBar: {
+    marginLeft: 10,
     padding: 0
   },
   datePicker: {
@@ -28,8 +29,8 @@ const Navigation = () => {
   const classes = useStyles();
   const dispatch = useDispatch();
   const selector = useSelector((state) => state);
-  const date = getCurrentDate(selector);
-  const dayjsDate = getDate(date);
+  const currentDate = getCurrentDate(selector);
+  const dayjsCurrentDate = getDate(currentDate);
 
   return(
       <Toolbar className={classes.toolBar}>
@@ -40,7 +41,7 @@ const Navigation = () => {
           InputProps={{style: {fontSize: 20, color: "white"}, disableUnderline: true}}
           InputLabelProps={{style: {fontSize: 20, color: "white", }}}
           className={classes.datePicker}
-          value={dayjsDate}
+          value={dayjsCurrentDate}
           onChange={(e) => dispatch(setDate(e))}
           variant="inline"
           format="YYYY/MM/DD"

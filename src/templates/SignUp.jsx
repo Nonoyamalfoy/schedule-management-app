@@ -30,7 +30,7 @@ const SignUp = () => {
       <h2>Create your acount</h2>
       <TextInput 
         fullWidth={true}
-        label={"Eser name"}
+        label={"User name"}
         multiline={false}
         required={true}
         rows={1}

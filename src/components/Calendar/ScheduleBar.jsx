@@ -19,7 +19,7 @@ const useStyles = makeStyles({
   }
 })
 
-const Schedule = (props) => {
+const ScheduleBar = (props) => {
   const classes = useStyles();
   const schedule = props.schedule
   const dispatch = useDispatch();
@@ -36,4 +36,4 @@ const Schedule = (props) => {
   )
 }
 
-export default Schedule;
+export default ScheduleBar;

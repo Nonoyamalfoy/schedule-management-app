@@ -1,6 +1,6 @@
 import React from "react";
 import { Route, Switch } from "react-router";
-import { Home, SignIn, SignUp, PasswordReset, Calendar, Diaries } from "./templates";
+import { Home, SignIn, SignUp, PasswordReset, Calendar, Diaries, ToDoList } from "./templates";
 import Auth from "./Auth";
 
 const Router = () => {
@@ -12,6 +12,7 @@ const Router = () => {
       <Auth>
         <Route exact path={"/calendar"} component={Calendar} />
         <Route exact path={"/diaries"} component={Diaries} />
+        <Route exact path={"/todoList"} component={ToDoList} />
         <Route exact path={"(/)?"} component={Home} />
       </Auth>
     </Switch>

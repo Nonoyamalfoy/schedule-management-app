@@ -2,12 +2,11 @@ import React from "react";
 import {
   Dialog,
   DialogContent,
-  IconButton,
   DialogActions,
   Grid,
   Typography
 } from "@material-ui/core";
-import {Close, LocationOnOutlined, NotesOutlined } from "@material-ui/icons";
+import {LocationOnOutlined, NotesOutlined } from "@material-ui/icons";
 import {makeStyles} from "@material-ui/styles";
 import { useDispatch, useSelector } from "react-redux";
 import {closeDialog} from "../../reducks/currentSchedule/operations"
@@ -15,7 +14,7 @@ import { getCurrentScheduleItem, getCurrentScheduleIsDialogOpen } from "../../re
 import dayjs from "dayjs";
 import {getUserId} from "../../reducks/users/selectors";
 import {openAddScheduleDialog} from "../../reducks/addSchedule/operation";
-import { MoreButton } from "../Uikit";
+import { MoreButton, CloseButton } from "../Uikit";
 import {setScheduleColor} from "../../services/schedule";
 import {removeSchedule} from "../../services/schedule";
 
@@ -32,18 +31,10 @@ const useStyles = makeStyles({
     marginLeft: 6,
     borderRadius: 4
   },
-  dialogHeader: {
-    display: "flex",
-    justifyContent: "flex-end",
-    minHeight: 48,
-    backgroundColor: "#3f51b5",
-    color: "white",
-    alignItems:"center"
-  },
   icon: {
     color: "white"
   }
-})
+});
 
 const CurrentScheduleDialog = () => {
   const classes = useStyles();
@@ -56,7 +47,7 @@ const CurrentScheduleDialog = () => {
 
   return (
     <Dialog open={isDialogOpen} onClose={() => dispatch(closeDialog())} maxWidth="xs" fullWidth>
-      <div className={classes.dialogHeader}>
+      <div className="dialogHeader">
         <DialogActions>
           <MoreButton
             size="small"
@@ -70,11 +61,8 @@ const CurrentScheduleDialog = () => {
               dispatch(closeDialog())
             }}
           />
-          <IconButton onClick={() => dispatch(closeDialog(closeDialog()))} size="small">
-            <Close className={classes.icon} />
-          </IconButton>
+          <CloseButton onClick={() => dispatch(closeDialog())}/>
         </DialogActions>
-
       </div>
 
       <DialogContent>

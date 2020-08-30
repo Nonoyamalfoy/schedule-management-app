@@ -10,8 +10,10 @@ import thunk from "redux-thunk";
 import {currentScheduleReducer} from "../currentSchedule/reducer";
 import {UsersReducer} from "../users/reducers";
 import { AddDiaryReducer } from "../addDiary/reducer";
+import {AddToDoReducer} from "../addToDo/reducer";
 import { currentDiaryReducer } from "../currentDiary/reducer";
 import {LoadingReducer} from '../loading/reducers';
+import {currentDateSchedulesReducer} from "../currentDateSchedules/reducer";
 
 export default function createStore(history){
   return reduxCreateStore(
@@ -22,8 +24,10 @@ export default function createStore(history){
       calendar: CalendarReducer,
       addSchedule: AddScheduleReducer,
       addDiary: AddDiaryReducer,
+      addToDo: AddToDoReducer,
       currentSchedule: currentScheduleReducer,
-      currentDiary: currentDiaryReducer
+      currentDiary: currentDiaryReducer,
+      currentDateSchedules: currentDateSchedulesReducer
     }),
     applyMiddleware(
       routerMiddleware(history),

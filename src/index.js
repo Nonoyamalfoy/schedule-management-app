@@ -11,12 +11,13 @@ import {MuiPickersUtilsProvider} from "@material-ui/pickers";
 import {ConnectedRouter} from "connected-react-router";
 import * as History from "history";
 import { MuiThemeProvider, createMuiTheme } from '@material-ui/core';
+import {theme} from "./assets/theme";
 
 
 dayjs.locale("ja");
 const history = History.createBrowserHistory();
 export const store = createStore(history);
-const theme = createMuiTheme()
+// const theme = createMuiTheme()
 
 ReactDOM.render(
   <Provider store={store}>

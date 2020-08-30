@@ -7,10 +7,7 @@ import {push} from "connected-react-router";
 
 const PasswordReset = () => {
   const dispatch = useDispatch();
-
-
   const [email, setEmail] = useState("");
-
   const inputEmail = useCallback((event) => {
     setEmail(event.target.value)
   }, [setEmail]);

@@ -13,6 +13,11 @@ export const UsersReducer = (state = initialState.users, action) => {
         ...state,
         schedules: [...action.payload]
       }
+    case Actions.FETCH_TODOLIST:
+      return {
+        ...state,
+        ToDoList: [...action.payload]
+      }
     case Actions.SIGN_IN:
       return {
         ...state,

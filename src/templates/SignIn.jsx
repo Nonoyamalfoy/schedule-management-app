@@ -19,7 +19,7 @@ const SignIn = () => {
 
   return (
     <div className="form">
-      <h2>Signin</h2>
+      <h2>Sign In</h2>
       <TextInput 
         fullWidth={true}
         label={"email"}
