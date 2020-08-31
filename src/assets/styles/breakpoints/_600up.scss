@@ -1,0 +1,58 @@
+main {
+  padding-top: 80px;
+}
+.home {
+  .calendar {
+    width: 50%;
+    &__container {
+      position: relative;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      border: 1px solid #20295f;
+      box-shadow: 0 3px 5px rgba(0, 0, 0, 0.5);
+      width: 90%;
+    }
+  }
+  .schedule {
+    margin-top: 20px;
+    margin-bottom: 20px;
+    width: 50%;
+    &__container {
+      box-shadow: 0 3px 5px rgba(0, 0, 0, 0.5);
+      border: 1px solid #20295f;
+      width: 90%;
+      height: 100%;
+    }
+  }
+  .diary {
+    height: 50%;
+    &__container {
+      box-shadow: 0 3px 5px rgba(0, 0, 0, 0.5);
+      border: 1px solid #20295f;
+      width: 95%;
+      height: 90%;
+    }
+  }
+}
+
+.p-calendar {
+  margin-top: 20px;
+  box-shadow: 0 3px 5px rgba(0, 0, 0, 0.5);
+  border: 1px solid #20295f;
+}
+
+.p-diaries,
+.p-ToDoList {
+  box-sizing: border-box;
+  padding-top: 20px;
+}
+
+.container__header {
+  & h2 {
+    font-size: 1.5rem;
+    line-height: normal;
+  }
+  height: auto;
+}
+
