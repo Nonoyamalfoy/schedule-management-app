@@ -16,13 +16,6 @@ import {openAddDiaryDialog} from "../../reducks/addDiary/operations";
 import { MoreButton, CloseButton } from "../Uikit";
 import {removeDiary, returnCodeToBr} from "../../services/diary";
 
-
-
-
-// const spacer = (top, bottom) => ({
-//   margin: `${top}px 0 ${bottom}px 0`
-// });
-
 const useStyles = makeStyles((theme) => ({
   dialog: {
     [theme.breakpoints.up(600)]:{

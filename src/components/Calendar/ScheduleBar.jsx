@@ -1,9 +1,8 @@
 import React from "react";
-import {makeStyles} from "@material-ui/styles";
-import {openSelectedScheduleDialog} from "../../reducks/selectedSchedule/operations";
+import { makeStyles } from "@material-ui/styles";
+import { openSelectedScheduleDialog } from "../../reducks/selectedSchedule/operations";
 import { useDispatch } from "react-redux";
-import {setScheduleColor} from "../../services/schedule";
-
+import { setScheduleColor } from "../../services/schedule";
 
 const useStyles = makeStyles({
   schedule: {
@@ -16,25 +15,25 @@ const useStyles = makeStyles({
     cursor: "pointer",
     fontWeight: 50,
     whiteSpace: "nowrap",
-    overflow: "hidden"
-  }
-})
+    overflow: "hidden",
+  },
+});
 
 const ScheduleBar = (props) => {
   const classes = useStyles();
-  const schedule = props.schedule
+  const schedule = props.schedule;
   const dispatch = useDispatch();
   const scheduleColor = setScheduleColor(schedule.color);
 
   return (
     <div
-      style={{backgroundColor: scheduleColor}}
+      style={{ backgroundColor: scheduleColor }}
       className={classes.schedule}
-      onClick={e => dispatch(openSelectedScheduleDialog(schedule, e))}
+      onClick={(e) => dispatch(openSelectedScheduleDialog(schedule, e))}
     >
       {schedule.title}
     </div>
-  )
-}
+  );
+};
 
 export default ScheduleBar;

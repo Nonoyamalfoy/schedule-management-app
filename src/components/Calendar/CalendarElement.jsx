@@ -2,11 +2,7 @@ import React from "react";
 import { makeStyles } from "@material-ui/styles";
 import { Typography, ListItem } from "@material-ui/core";
 import dayjs from "dayjs";
-import {
-  isSameMonth,
-  isFirstDay,
-  isSameDay,
-} from "../../services/calendar";
+import { isSameMonth, isFirstDay, isSameDay } from "../../services/calendar";
 import { ScheduleBar } from "./index";
 import { getCurrentDate } from "../../reducks/calendar/selectors";
 import { useSelector } from "react-redux";

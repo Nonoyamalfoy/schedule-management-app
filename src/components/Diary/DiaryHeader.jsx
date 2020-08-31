@@ -1,15 +1,15 @@
 import React from "react";
-import {useDispatch, useSelector} from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { MoreButton, CreateButton } from "../Uikit";
-import {removeDiary} from "../../services/diary";
+import { removeDiary } from "../../services/diary";
 import { openAddDiaryDialog } from "../../reducks/addDiary/operations";
-import {makeStyles} from "@material-ui/styles";
+import { makeStyles } from "@material-ui/styles";
 import { getCurrentDate } from "../../reducks/calendar/selectors";
 import { getDiaries, getUserId } from "../../reducks/users/selectors";
 
 const useStyles = makeStyles({
   icon: {
-    color: "white"
+    color: "white",
   },
 });
 
@@ -25,29 +25,35 @@ const DiaryHeader = () => {
   const currentDiaryId = currentDiary ? currentDiary.diaryId : "";
   const uid = getUserId(selector);
 
-  return(
+  return (
     <div className="container__header">
-        <h2 >DIARY</h2>
-        {currentDiary ? (
-          <MoreButton
-            size="small"
-            className={classes.icon}
-            onClickEdit={() => {
-              dispatch(openAddDiaryDialog(formatCurrentDate, currentDiaryId, currentDiaryText));
-            }}
-            onClickRemove={() => {
-              removeDiary(uid, currentDiaryId);
-            }}
-          />
-        ) : (
-          <CreateButton
-            className={classes.icon}
-            size="small"
-            onClick={() => dispatch(openAddDiaryDialog(formatCurrentDate))}
-          />
-        )}
+      <h2>DIARY</h2>
+      {currentDiary ? (
+        <MoreButton
+          size="small"
+          className={classes.icon}
+          onClickEdit={() => {
+            dispatch(
+              openAddDiaryDialog(
+                formatCurrentDate,
+                currentDiaryId,
+                currentDiaryText
+              )
+            );
+          }}
+          onClickRemove={() => {
+            removeDiary(uid, currentDiaryId);
+          }}
+        />
+      ) : (
+        <CreateButton
+          className={classes.icon}
+          size="small"
+          onClick={() => dispatch(openAddDiaryDialog(formatCurrentDate))}
+        />
+      )}
     </div>
-  )
-}
+  );
+};
 
 export default DiaryHeader;

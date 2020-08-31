@@ -12,7 +12,7 @@ const useStyles = makeStyles((theme) => ({
     border: "1px solid #3f51b5",
     boxShadow: "0 3px 5px rgba(0,0,0,0.5)",
     width: "90%",
-    margin: "0 auto"
+    margin: "0 auto",
   },
   listItemText: {
     marginRight: 20,
@@ -23,7 +23,8 @@ const DiaryList = (props) => {
   const classes = useStyles();
   const dispatch = useDispatch();
   const diaryText = props.diary.text;
-  const displayText = diaryText.length > 120 ? diaryText.substr(0, 120) + "..." : diaryText;
+  const displayText =
+    diaryText.length > 120 ? diaryText.substr(0, 120) + "..." : diaryText;
 
   return (
     <>
